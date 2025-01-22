@@ -76,14 +76,14 @@ packages:
     source: hosted
     version: "0.2.1"
   mapbox_gl_platform_interface:
-    dependency: "direct main"
+    dependency: "direct overridden"
     description:
       path: mapbox_gl_platform_interface
       relative: true
     source: path
-    version: "0.16.0"
+    version: "0.16.2"
   mapbox_gl_web:
-    dependency: "direct main"
+    dependency: "direct overridden"
     description:
       path: mapbox_gl_web
       relative: true
