@@ -9,7 +9,6 @@ import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
-import io.flutter.plugin.common.PluginRegistry;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -26,14 +25,8 @@ class GlobalMethodHandler implements MethodChannel.MethodCallHandler {
   private static final int BUFFER_SIZE = 1024 * 2;
   @NonNull private final Context context;
   @NonNull private final BinaryMessenger messenger;
-  @Nullable private PluginRegistry.Registrar registrar;
   @Nullable private FlutterPlugin.FlutterAssets flutterAssets;
 
-  GlobalMethodHandler(@NonNull PluginRegistry.Registrar registrar) {
-    this.registrar = registrar;
-    this.context = registrar.activeContext();
-    this.messenger = registrar.messenger();
-  }
 
   GlobalMethodHandler(@NonNull FlutterPlugin.FlutterPluginBinding binding) {
     this.context = binding.getApplicationContext();
@@ -142,9 +135,7 @@ class GlobalMethodHandler implements MethodChannel.MethodCallHandler {
       return new FileInputStream(new File(tilesDb));
     } else {
       String assetKey;
-      if (registrar != null) {
-        assetKey = registrar.lookupKeyForAsset(tilesDb);
-      } else if (flutterAssets != null) {
+      if (flutterAssets != null) {
         assetKey = flutterAssets.getAssetFilePathByName(tilesDb);
       } else {
         throw new IllegalStateException();
