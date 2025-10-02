@@ -37,8 +37,8 @@ apply plugin: 'com.android.library'
 
 android {
     namespace = "com.mapbox.mapboxgl"
-    compileSdkVersion 31
-    ndkVersion "20.1.5948944"
+    compileSdkVersion 36
+    ndkVersion "29.0.14033849"
 
     defaultConfig {
         minSdkVersion 20
@@ -53,12 +53,19 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     dependencies {
-        implementation "com.mapbox.mapboxsdk:mapbox-android-sdk:9.6.2"
-        implementation "com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v9:0.9.0"
-        implementation "com.mapbox.mapboxsdk:mapbox-android-plugin-localization-v9:0.12.0"
-        implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-offline-v9:0.7.0'
-        implementation 'com.squareup.okhttp3:okhttp:4.9.0'
-        implementation 'com.mapbox.mapboxsdk:mapbox-sdk-turf:5.1.0'
+        // **SDK MapLibre** (fork del Mapbox v9, ahora con 16 KB en rama 10.x)
+        implementation "org.maplibre.gl:android-sdk:10.3.4" // o una 10.x más nueva
+
+        // **Plugins MapLibre**: usa los artefactos con sufijo v{MAJOR}
+        // Ejemplos (ajusta versiones a las más recientes en Maven Central):
+        implementation "org.maplibre.gl:android-plugin-annotation-v10:3.0.2"
+        implementation "org.maplibre.gl:android-plugin-localization-v10:3.0.2"
+        implementation "org.maplibre.gl:android-plugin-offline-v10:3.0.2"
+
+        // Resto de dependencias
+        implementation "com.squareup.okhttp3:okhttp:4.12.0"  // opcional subir desde 4.9.0
+        // Puedes mantener Turf de Mapbox (es Java puro) o pasar a utilidades de MapLibre
+        implementation "com.mapbox.mapboxsdk:mapbox-sdk-turf:5.1.0"
     }
     compileOptions {
         sourceCompatibility 1.8
