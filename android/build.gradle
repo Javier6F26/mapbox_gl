@@ -53,19 +53,18 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     dependencies {
-        // **SDK MapLibre** (fork del Mapbox v9, ahora con 16 KB en rama 10.x)
-        implementation "org.maplibre.gl:android-sdk:10.3.4" // o una 10.x más nueva
+        // Núcleo MapLibre (API legacy v9, paquete org.maplibre.android)
+        implementation "org.maplibre.gl:android-sdk:10.2.0"   // o la 10.x más reciente publicada
+        // Plugins MapLibre: sufijo -v9 (las coords -v10 no existen)
+        implementation "org.maplibre.gl:android-plugin-annotation-v9:3.0.2"
+        implementation "org.maplibre.gl:android-plugin-localization-v9:3.0.2"
+        implementation "org.maplibre.gl:android-plugin-offline-v9:3.0.2"
+        // (Opcionales si los usas)
+        // implementation "org.maplibre.gl:android-plugin-building-v9:3.0.2"
+        // implementation "org.maplibre.gl:android-plugin-markerview-v9:3.0.2"
 
-        // **Plugins MapLibre**: usa los artefactos con sufijo v{MAJOR}
-        // Ejemplos (ajusta versiones a las más recientes en Maven Central):
-        implementation "org.maplibre.gl:android-plugin-annotation-v10:3.0.2"
-        implementation "org.maplibre.gl:android-plugin-localization-v10:3.0.2"
-        implementation "org.maplibre.gl:android-plugin-offline-v10:3.0.2"
-
-        // Resto de dependencias
-        implementation "com.squareup.okhttp3:okhttp:4.12.0"  // opcional subir desde 4.9.0
-        // Puedes mantener Turf de Mapbox (es Java puro) o pasar a utilidades de MapLibre
-        implementation "com.mapbox.mapboxsdk:mapbox-sdk-turf:5.1.0"
+        // Otras
+        implementation "com.squareup.okhttp3:okhttp:4.12.0"
     }
     compileOptions {
         sourceCompatibility 1.8
